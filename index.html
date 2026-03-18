@@ -1,0 +1,2894 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=3.0" />
+  <title>Instituto Tecnológico INFOPRO</title>
+<link rel="icon" type="image/png" href="media/LOGOHD.PNG.png">
+  <!-- =====================================================
+       FUENTES - Google Fonts
+       Puedes cambiarlas aquí si deseas otras tipografías
+  ====================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =====================================================
+       VARIABLES DE COLOR — EDITAR AQUÍ LOS COLORES
+       Cambia estos valores cuando tengas los colores
+       oficiales del instituto.
+    ====================================================== */
+    :root {
+      --color-primario:       #df0d20;   /* ROJO principal */
+      --color-primario-dark:  #990000;   /* Rojo oscuro (hover) */
+      --color-negro:          #111111;   /* Negro institucional */
+      --color-gris-oscuro:    #2C2C2C;   /* Gris oscuro (títulos) */
+      --color-gris-medio:     #888888;   /* Gris medio (subtítulos) */
+      --color-gris-claro:     #F4F4F4;   /* Gris claro (fondos sección) */
+      --color-blanco:         #FFFFFF;   /* Blanco */
+      --color-acento:         #888888;   /* Gris acento (líneas decorativas) */
+
+      --fuente-titulo:  'Barlow Condensed', sans-serif;
+      --fuente-cuerpo:  'Barlow', sans-serif;
+
+      --sombra-suave: 0 4px 24px rgba(0,0,0,0.08);
+      --sombra-media: 0 8px 40px rgba(0,0,0,0.14);
+      --radio-tarjeta: 12px;
+      --transicion: all 0.3s ease;
+    }
+
+    /* =====================================================
+       RESET Y BASE
+    ====================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0  ; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--fuente-cuerpo);
+      color: var(--color-gris-oscuro);
+      background: var(--color-blanco);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a   { text-decoration: none; color: inherit; }
+    ul  { list-style: none; }
+
+    /* =====================================================
+       UTILIDADES
+    ====================================================== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-family: var(--fuente-titulo);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-primario);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--fuente-titulo);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--color-negro);
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--color-gris-medio);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    .divider-red {
+      width: 56px;
+      height: 4px;
+      background: var(--color-primario);
+      border-radius: 2px;
+      margin: 18px 0 32px;
+    }
+
+    /* Botones */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--fuente-titulo);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: var(--transicion);
+    }
+    .btn-rojo {
+      background: var(--color-primario);
+      color: var(--color-blanco);
+      border-color: var(--color-primario);
+    }
+    .btn-rojo:hover {
+      background: var(--color-primario-dark);
+      border-color: var(--color-primario-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(204,0,0,0.3);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--color-blanco);
+      border-color: var(--color-blanco);
+    }
+    .btn-outline:hover {
+      background: var(--color-blanco);
+      color: var(--color-primario);
+    }
+    .btn-whatsapp {
+      background: #25D366;
+      color: var(--color-blanco);
+      border-color: #25D366;
+      font-size: 1.05rem;
+      padding: 16px 36px;
+    }
+    .btn-whatsapp:hover {
+      background: #1daf55;
+      border-color: #1daf55;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37,211,102,0.35);
+    }
+
+    /* Placeholder de imagen */
+    .img-placeholder {
+      background: linear-gradient(135deg, #e0e0e0 0%, #c8c8c8 100%);
+      border-radius: var(--radio-tarjeta);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #999;
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.82rem;
+    }
+    .img-placeholder svg { opacity: 0.5; }
+
+    /* Animaciones de entrada */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =====================================================
+       SECCIÓN NOVEDADES / TIKTOK
+    ====================================================== */
+    #novedades {
+      background: #0d0d0d;
+      padding: 100px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Fondo decorativo con gradiente TikTok */
+    #novedades::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(254,44,85,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    #novedades::after {
+      content: '';
+      position: absolute;
+      bottom: -150px; left: -150px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(37,244,238,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .novedades-header {
+      text-align: center;
+      margin-bottom: 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .novedades-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(254,44,85,0.12);
+      border: 1px solid rgba(254,44,85,0.3);
+      color: #fe2c55;
+      font-family: var(--fuente-titulo);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .tiktok-icon-inline {
+      width: 16px; height: 16px;
+      fill: #fe2c55;
+    }
+
+    .novedades-title {
+      font-family: var(--fuente-titulo);
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+    .novedades-title span { color: #fe2c55; }
+
+    .novedades-subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.45);
+      max-width: 500px;
+      margin: 0 auto 0;
+      line-height: 1.7;
+    }
+
+    /* GRID DE VIDEOS */
+    .tiktok-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+      align-items: start;
+    }
+
+    /* Tarjeta contenedora de embed */
+    .tiktok-card {
+      background: #1a1a1a;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      position: relative;
+    }
+    .tiktok-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(254,44,85,0.2);
+      border-color: rgba(254,44,85,0.3);
+    }
+
+    /* El embed de TikTok se coloca directamente aquí */
+    .tiktok-embed-wrap {
+      width: 100%;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tiktok-embed-wrap blockquote.tiktok-embed {
+      margin: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      border: none !important;
+    }
+
+    /* Placeholder cuando no hay embed */
+    .tiktok-placeholder {
+      width: 100%;
+      aspect-ratio: 9/16;
+      background: linear-gradient(145deg, #1e1e1e, #161616);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 380px;
+    }
+    .tiktok-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent 0px,
+        transparent 10px,
+        rgba(255,255,255,0.015) 10px,
+        rgba(255,255,255,0.015) 11px
+      );
+    }
+    .tiktok-placeholder-icon {
+      width: 56px; height: 56px;
+      background: rgba(254,44,85,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+    .tiktok-placeholder-icon svg { fill: #fe2c55; }
+    .tiktok-placeholder-text {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.82rem;
+      font-family: var(--fuente-cuerpo);
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+    }
+    .tiktok-placeholder-code {
+      background: rgba(254,44,85,0.1);
+      border: 1px dashed rgba(254,44,85,0.35);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-family: monospace;
+      font-size: 0.72rem;
+      color: rgba(254,44,85,0.8);
+      position: relative;
+      z-index: 1;
+      text-align: left;
+      width: 100%;
+      word-break: break-all;
+    }
+
+    /* Barra inferior de la tarjeta */
+    .tiktok-card-footer {
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .tiktok-card-num {
+      font-family: var(--fuente-titulo);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .tiktok-card-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #fe2c55;
+      font-family: var(--fuente-titulo);
+      letter-spacing: 0.05em;
+    }
+    .tiktok-card-badge svg { width: 12px; height: 12px; fill: #fe2c55; }
+
+    /* CTA botón seguir */
+    .novedades-cta {
+      text-align: center;
+      margin-top: 52px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-tiktok {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #fe2c55, #c8003c);
+      color: #fff;
+      font-family: var(--fuente-titulo);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 16px 40px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+    .btn-tiktok:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(254,44,85,0.4);
+    }
+    .btn-tiktok svg { width: 20px; height: 20px; fill: #fff; }
+
+    .novedades-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 28px;
+    }
+    .novedades-stat {
+      text-align: center;
+    }
+    .novedades-stat-num {
+      font-family: var(--fuente-titulo);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .novedades-stat-label {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-family: var(--fuente-titulo);
+    }
+    .novedades-stat-sep {
+      width: 1px;
+      height: 36px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* Responsive novedades */
+    @media (max-width: 900px) {
+      .tiktok-grid { grid-template-columns: 1fr 1fr; }
+      .tiktok-grid .tiktok-card:last-child { display: none; }
+    }
+    @media (max-width: 600px) {
+      .tiktok-grid { grid-template-columns: 1fr; }
+      .tiktok-grid .tiktok-card:last-child { display: flex; }
+    }
+
+    /* =====================================================
+       HEADER / NAVBAR
+    ====================================================== */
+    #header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--color-blanco);
+      border-bottom: 3px solid var(--color-primario);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      transition: var(--transicion);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    /* LOGO */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-logo-img {
+      /* REEMPLAZAR: cambia "src" por la ruta real del logo */
+      width: 240px;
+      height: auto;
+      object-fit: contain;
+    }
+    .nav-logo-placeholder {
+      /* Visible sólo si no hay imagen */
+      width: 160px;
+      height: 52px;
+      background: var(--color-gris-claro);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--fuente-titulo);
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--color-negro);
+      letter-spacing: 0.04em;
+    }
+    .nav-logo-placeholder span { color: var(--color-primario); }
+
+    /* LINKS DE NAVEGACIÓN */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-family: var(--fuente-titulo);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--color-gris-oscuro);
+      position: relative;
+      transition: color 0.2s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--color-primario);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--color-primario); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* HAMBURGUESA (móvil) */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 26px; height: 2px;
+      background: var(--color-negro);
+      border-radius: 2px;
+      transition: var(--transicion);
+    }
+
+    /* =====================================================
+       HERO
+    ====================================================== */
+    #hero {
+      min-height: 100vh;
+      background: var(--color-negro);
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: 72px;
+    }
+
+    /* Línea decorativa roja vertical */
+    #hero::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 6px;
+      background: var(--color-primario);
+    }
+
+    /* Fondo: textura geométrica sutil */
+    .hero-bg-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image:
+        repeating-linear-gradient(
+          45deg,
+          #fff 0px, #fff 1px,
+          transparent 1px, transparent 40px
+        );
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      padding: 80px 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-content { color: var(--color-blanco); }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(204,0,0,0.18);
+      border: 1px solid rgba(204,0,0,0.4);
+      color: #ff6b6b;
+      font-family: var(--fuente-titulo);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      background: var(--color-primario);
+      border-radius: 50%;
+      animation: pulse-dot 1.6s infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(1.5); opacity: 0.5; }
+    }
+
+    .hero-title {
+      font-family: var(--fuente-titulo);
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .hero-title-red { color: var(--color-primario); }
+
+    .hero-tagline {
+      font-family: var(--fuente-titulo);
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 32px;
+      line-height: 1.3;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.55);
+      max-width: 420px;
+      margin-bottom: 40px;
+    }
+
+    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero-stat-num {
+      font-family: var(--fuente-titulo);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--color-primario);
+    }
+    .hero-stat-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* IMAGEN HERO */
+    .hero-image-wrap {
+      position: relative;
+    }
+    .hero-img-main {
+      /* REEMPLAZAR: pon aquí la imagen principal del hero */
+      width: 100%;
+      height: 480px;
+      border-radius: var(--radio-tarjeta);
+      object-fit: cover;
+    }
+    .hero-img-placeholder {
+      width: 100%;
+      height: 480px;
+      border-radius: var(--radio-tarjeta);
+      border: 2px dashed rgba(255,255,255,0.2);
+    }
+    .hero-img-badge {
+      position: absolute;
+      bottom: -20px; left: -20px;
+      background: var(--color-primario);
+      color: var(--color-blanco);
+      font-family: var(--fuente-titulo);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: var(--sombra-media);
+    }
+    .hero-img-badge span {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    /* =====================================================
+       BARRA DE CONFIANZA
+    ====================================================== */
+    #trust-bar {
+      background: var(--color-gris-claro);
+      padding: 20px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .trust-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--fuente-titulo);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--color-gris-oscuro);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .trust-item svg { color: var(--color-primario); }
+
+    /* =====================================================
+       SECCIÓN ACERCA DE NOSOTROS
+    ====================================================== */
+    #acerca {
+      padding: 100px 0;
+      background: var(--color-blanco);
+    }
+    .acerca-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .acerca-image-stack {
+      position: relative;
+    }
+    .acerca-img-main {
+      /* REEMPLAZAR: imagen principal de la sección "Acerca de" */
+      width: 100%;
+      height: 420px;
+      border-radius: var(--radio-tarjeta);
+      object-fit: cover;
+    }
+    .acerca-img-placeholder {
+      width: 100%;
+      height: 420px;
+    }
+    .acerca-img-badge {
+      position: absolute;
+      bottom: -24px; right: -24px;
+      background: var(--color-negro);
+      color: var(--color-blanco);
+      padding: 20px 24px;
+      border-radius: 12px;
+      text-align: center;
+      font-family: var(--fuente-titulo);
+      box-shadow: var(--sombra-media);
+    }
+    .acerca-img-badge-num {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--color-primario);
+      line-height: 1;
+    }
+    .acerca-img-badge-txt {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .acerca-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .acerca-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px;
+      background: var(--color-gris-claro);
+      border-radius: 10px;
+      border-left: 3px solid var(--color-primario);
+    }
+    .acerca-feature-icon {
+      width: 36px; height: 36px;
+      background: var(--color-primario);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: white;
+    }
+    .acerca-feature-text strong {
+      display: block;
+      font-family: var(--fuente-titulo);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--color-negro);
+      margin-bottom: 2px;
+    }
+    .acerca-feature-text span {
+      font-size: 0.8rem;
+      color: var(--color-gris-medio);
+    }
+
+    /* =====================================================
+       SECCIÓN MISIÓN Y VISIÓN
+    ====================================================== */
+    #mision-vision {
+      padding: 80px 0;
+      background: var(--color-negro);
+    }
+    .mv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .mv-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-top: 4px solid var(--color-primario);
+      border-radius: var(--radio-tarjeta);
+      padding: 48px 40px;
+      transition: var(--transicion);
+    }
+    .mv-card:hover {
+      background: rgba(255,255,255,0.07);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+    }
+    .mv-icon {
+      width: 56px; height: 56px;
+      background: var(--color-primario);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 24px;
+      color: white;
+    }
+    .mv-card-label {
+      font-family: var(--fuente-titulo);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-primario);
+      margin-bottom: 10px;
+    }
+    .mv-card-title {
+      font-family: var(--fuente-titulo);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--color-blanco);
+      margin-bottom: 20px;
+    }
+
+    /* EDITAR: Reemplaza este texto con la misión real */
+    .mv-card-text {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+    }
+
+    /* =====================================================
+       SECCIÓN CARRERAS
+    ====================================================== */
+    #carreras {
+      padding: 100px 0;
+      background: var(--color-gris-claro);
+    }
+    .carreras-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .carreras-header .divider-red { margin: 18px auto 0; }
+
+    .carreras-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+
+    .carrera-card {
+      background: var(--color-blanco);
+      border-radius: var(--radio-tarjeta);
+      overflow: hidden;
+      box-shadow: var(--sombra-suave);
+      transition: var(--transicion);
+      display: flex;
+      flex-direction: column;
+    }
+    .carrera-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--sombra-media);
+    }
+
+    /* IMAGEN DE CARRERA */
+    .carrera-img {
+      /* REEMPLAZAR: Cambia el src a la imagen real de cada carrera */
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .carrera-img-placeholder {
+      width: 100%;
+      height: 200px;
+    }
+
+    .carrera-body {
+      padding: 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .carrera-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(204,0,0,0.08);
+      color: var(--color-primario);
+      font-family: var(--fuente-titulo);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+      align-self: flex-start;
+    }
+    .carrera-nombre {
+      font-family: var(--fuente-titulo);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--color-negro);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    .carrera-desc {
+      font-size: 0.9rem;
+      color: var(--color-gris-medio);
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+    .carrera-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid #eee;
+    }
+    .carrera-duracion {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--fuente-titulo);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--color-negro);
+    }
+    .carrera-duracion svg { color: var(--color-primario); }
+    .carrera-cta {
+      font-family: var(--fuente-titulo);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--color-primario);
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap 0.2s;
+    }
+    .carrera-card:hover .carrera-cta { gap: 8px; }
+
+    /* =====================================================
+       SECCIÓN PLANES DE ESTUDIO
+    ====================================================== */
+    #planes {
+      padding: 100px 0;
+      background: var(--color-blanco);
+    }
+    .planes-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-bottom: 60px;
+    }
+
+    /* TABS de carreras */
+    .planes-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .planes-tab {
+      font-family: var(--fuente-titulo);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border-radius: 6px;
+      border: 2px solid #ddd;
+      background: transparent;
+      color: var(--color-gris-medio);
+      cursor: pointer;
+      transition: var(--transicion);
+    }
+    .planes-tab.active, .planes-tab:hover {
+      border-color: var(--color-primario);
+      color: var(--color-primario);
+      background: rgba(204,0,0,0.05);
+    }
+
+    /* Contenido de plan (placeholder para agregar tabla/lista después) */
+    .plan-content {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    .plan-content.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .plan-placeholder-box {
+      border: 2px dashed #ddd;
+      border-radius: var(--radio-tarjeta);
+      padding: 48px;
+      text-align: center;
+    }
+    .plan-placeholder-box h4 {
+      font-family: var(--fuente-titulo);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-negro);
+      margin-bottom: 8px;
+    }
+    .plan-placeholder-box p {
+      font-size: 0.88rem;
+      color: var(--color-gris-medio);
+    }
+    /* ESPACIO PARA IMAGEN DEL PLAN */
+    .plan-img-placeholder {
+      width: 100%;
+      height: 240px;
+      margin-top: 24px;
+    }
+
+    /* =====================================================
+       SECCIÓN FORMACIÓN PRÁCTICA
+    ====================================================== */
+    #practica {
+      padding: 100px 0;
+      background: var(--color-negro);
+      position: relative;
+      overflow: hidden;
+    }
+    #practica::after {
+      content: 'PRÁCTICA';
+      position: absolute;
+      right: -40px; bottom: -20px;
+      font-family: var(--fuente-titulo);
+      font-size: 12rem;
+      font-weight: 800;
+      color: rgba(255,255,255,0.03);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .practica-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative; z-index: 1;
+    }
+    .practica-img-placeholder {
+      width: 100%; height: 440px;
+      border-radius: var(--radio-tarjeta);
+      border: 2px dashed rgba(255,255,255,0.15);
+    }
+
+    .practica-content { color: var(--color-blanco); }
+    .practica-content .section-title { color: var(--color-blanco); }
+
+    .practica-items {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .practica-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 10px;
+      border-left: 3px solid var(--color-primario);
+    }
+    .practica-item-num {
+      font-family: var(--fuente-titulo);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--color-primario);
+      line-height: 1;
+      min-width: 40px;
+    }
+    .practica-item-title {
+      font-family: var(--fuente-titulo);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-blanco);
+      margin-bottom: 4px;
+    }
+    .practica-item-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* =====================================================
+       SECCIÓN CONTACTO
+    ====================================================== */
+    #contacto {
+      padding: 100px 0;
+      background: var(--color-gris-claro);
+    }
+    .contacto-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contacto-content .section-subtitle {
+      margin-bottom: 40px;
+    }
+
+    .contacto-whatsapp-wrap {
+      margin-bottom: 32px;
+    }
+    .contacto-whatsapp-hint {
+      font-size: 0.82rem;
+      color: var(--color-gris-medio);
+      margin-top: 12px;
+    }
+
+    /* Redes sociales - EDITAR LINKS */
+    .redes-label {
+      font-family: var(--fuente-titulo);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-gris-medio);
+      margin-bottom: 16px;
+    }
+    .redes-grid {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .red-social-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: 2px solid #ddd;
+      background: var(--color-blanco);
+      font-family: var(--fuente-titulo);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--color-gris-oscuro);
+      cursor: pointer;
+      transition: var(--transicion);
+      text-decoration: none;
+    }
+    /* EDITAR: Agrega el href real a cada red social cuando estén disponibles */
+    .red-social-btn:hover { transform: translateY(-2px); box-shadow: var(--sombra-suave); }
+    .red-social-btn.facebook:hover { border-color: #1877F2; color: #1877F2; }
+    .red-social-btn.instagram:hover { border-color: #E1306C; color: #E1306C; }
+    .red-social-btn.tiktok:hover { border-color: #000; color: #000; }
+
+    /* Dirección */
+    .contacto-info-card {
+      background: var(--color-blanco);
+      border-radius: var(--radio-tarjeta);
+      padding: 32px;
+      box-shadow: var(--sombra-suave);
+    }
+    .contacto-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .contacto-info-item:last-child { border-bottom: none; }
+    .contacto-info-icon {
+      width: 40px; height: 40px;
+      background: rgba(204,0,0,0.08);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--color-primario);
+      flex-shrink: 0;
+    }
+    .contacto-info-label {
+      font-family: var(--fuente-titulo);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-gris-medio);
+      margin-bottom: 4px;
+    }
+    .contacto-info-value {
+      font-size: 0.95rem;
+      color: var(--color-negro);
+      font-weight: 500;
+    }
+
+    /* ESPACIO MAPA (Google Maps iframe va aquí) */
+    .mapa-placeholder {
+      margin-top: 24px;
+      height: 220px;
+      background: #ddd;
+      border-radius: var(--radio-tarjeta);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 0.85rem;
+      font-family: var(--fuente-cuerpo);
+      border: 2px dashed #ccc;
+    }
+
+    /* =====================================================
+       FOOTER
+    ====================================================== */
+    #footer {
+      background: var(--color-negro);
+      color: var(--color-blanco);
+      padding: 56px 0 0;
+    }
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-brand-logo {
+      /* REEMPLAZAR: logo blanco o versión light */
+      height: 48px;
+      margin-bottom: 20px;
+      object-fit: contain;
+      filter: brightness(0) invert(1); /* hace el logo blanco */
+    }
+    .footer-brand-logo-placeholder {
+      height: 48px;
+      margin-bottom: 20px;
+      font-family: var(--fuente-titulo);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--color-blanco);
+      letter-spacing: 0.04em;
+    }
+    .footer-brand-logo-placeholder span { color: var(--color-primario); }
+
+    .footer-desc {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.8;
+      max-width: 300px;
+      margin-bottom: 24px;
+    }
+    .footer-redes {
+      display: flex;
+      gap: 12px;
+    }
+    /* EDITAR: Agrega los links reales de redes sociales */
+    .footer-red {
+      width: 38px; height: 38px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.5);
+      transition: var(--transicion);
+    }
+    .footer-red:hover {
+      background: var(--color-primario);
+      color: var(--color-blanco);
+    }
+
+    .footer-col-title {
+      font-family: var(--fuente-titulo);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 20px;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-links a {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .footer-links a:hover { color: var(--color-primario); }
+
+    .footer-bottom {
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copy {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.3);
+    }
+    .footer-rm {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(204,0,0,0.12);
+      border: 1px solid rgba(204,0,0,0.25);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-family: var(--fuente-titulo);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ff8080;
+    }
+
+    /* =====================================================
+       RESPONSIVE — MÓVIL
+    ====================================================== */
+    @media (max-width: 900px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: var(--color-blanco); padding: 24px; border-bottom: 3px solid var(--color-primario); box-shadow: var(--sombra-media); gap: 20px; }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: flex; }
+      #header { position: relative; }
+
+      .hero-inner          { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px; }
+      .hero-img-badge      { bottom: 12px; left: 12px; }
+      .hero-stats          { gap: 24px; }
+
+      .acerca-inner        { grid-template-columns: 1fr; gap: 60px; }
+      .acerca-img-badge    { bottom: 12px; right: 12px; }
+      .acerca-features     { grid-template-columns: 1fr; }
+
+      .mv-grid             { grid-template-columns: 1fr; }
+      .carreras-grid       { grid-template-columns: 1fr; }
+      .planes-intro        { grid-template-columns: 1fr; gap: 40px; }
+      .practica-inner      { grid-template-columns: 1fr; gap: 48px; }
+      .contacto-inner      { grid-template-columns: 1fr; gap: 48px; }
+      .footer-inner        { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom       { flex-direction: column; text-align: center; }
+      .trust-bar-inner     { gap: 20px; }
+    }
+
+    @media (max-width: 560px) {
+      .hero-buttons  { flex-direction: column; }
+      .mv-card       { padding: 32px 24px; }
+      .plan-placeholder-box { padding: 32px 16px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =======================================================
+       HEADER / NAVBAR
+  ======================================================== -->
+  <header id="header">
+    <div class="container">
+      <nav class="nav-inner">
+
+        <!-- LOGO — EDITAR: Descomenta <img> y elimina el div placeholder cuando tengas el logo -->
+        <a href="#hero" class="nav-logo">
+          <!-- <img src="RUTA/DEL/LOGO.png" alt="INFOPRO" class="nav-logo-img" /> -->
+          <img src="media/LOGO.PNG.png" alt="INFOPRO" class="nav-logo-img" />
+        </a>
+
+        <!-- MENÚ DE NAVEGACIÓN — EDITAR: puedes añadir o quitar ítems -->
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#hero">Inicio</a></li>
+          <li><a href="#acerca">¿Quienes somos?</a></li>
+          <li><a href="#novedades">Novedades</a></li>
+          <li><a href="#carreras">Carreras</a></li>
+            <li><a href="inscripcion.html" style="background:var(--color-primario); color:#fff !important; padding:8px 18px; border-radius:6px; font-weight:700;">INSCRIBIRSE EN LINEA</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+
+        <!-- BOTÓN HAMBURGUESA (móvil) -->
+        <button class="nav-toggle" id="navToggle" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
+
+      </nav>
+    </div>
+  </header>
+
+  <!-- =======================================================
+       HERO — PORTADA PRINCIPAL
+  ======================================================== -->
+   <div id="banner-top">
+    <img src="media/BANNER PRINCIPAL.png" id="banner-img" alt="Banner INFOPRO">
+  </div>
+  <style>
+    #banner-top { width:100%; line-height:0; }
+    #banner-top img { width:100%; display:block; object-fit:cover; }
+    @media (max-width: 768px) {
+      #banner-img { content: url("media/BANNER_MOVIL.jpg"); }
+    }
+  </style>
+  <!-- FIN BANNER -->
+
+  <section id="hero">
+    <div class="hero-bg-pattern"></div>
+    <div class="container">
+      <div class="hero-inner">
+
+        <!-- CONTENIDO IZQUIERDO -->
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Instituto Técnnológico · Resolución Ministerial 1106/2022
+          </div>
+
+          <!-- EDITAR: Nombre del instituto -->
+          <div style="background:#ffffff; border-radius:10px; padding:14px 28px; display:inline-block; margin-bottom:8px;">
+  <img src="media/INFOPROHDHORIZONTAL.png.png" alt="INFOPRO" style="height:110px; width:auto; display:block;" />
+</div>
+<h1 class="hero-title" style="display:none;">
+  INFO<span class="hero-title-red">PRO</span>
+          </h1>
+          <!-- EDITAR: Tagline principal -->
+          <p class="hero-tagline">Formando profesionales<br />para el futuro</p>
+          <!-- EDITAR: Descripción breve -->
+          <p class="hero-desc">
+            Instituto Tecnológico de Formación Profesional. Aprende habilidades reales, con docentes especializados y prácticas desde el primer semestre.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#carreras" class="btn btn-rojo">Conoce nuestras carreras →</a>
+            <a href="#contacto" class="btn btn-outline">Contáctanos</a>
+          </div>
+<a href="#contacto" class="btn btn-outline" style="margin-top:10px;"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right:6px"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Visítanos en Cochabamba</a>
+          <!-- ESTADÍSTICAS — EDITAR cuando tengas datos reales -->
+          <div class="hero-stats">
+            <div>
+              <div class="hero-stat-num">2023</div>
+              <div class="hero-stat-label">Año de fundación</div>
+            </div>
+            <div>
+              <div class="hero-stat-num">4</div>
+              <div class="hero-stat-label">Carreras técnicas</div>
+            </div>
+            <div>
+              <div class="hero-stat-num">100%</div>
+              <div class="hero-stat-label">Aprendizaje práctico</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- IMAGEN PRINCIPAL HERO -->
+        <!-- EDITAR: Reemplaza el div placeholder por: <img src="RUTA/IMAGEN.jpg" alt="..." class="hero-img-main"> -->
+        <div class="hero-image-wrap" style="position:relative;">
+          <div style="color:#fff; font-family:var(--fuente-titulo); font-weight:800; font-size:3.6rem; line-height:1.2; margin-bottom:12px;">
+  COMPROMETIDOS CON LA<br>EXCELENCIA ACADÉMICA
+</div>
+          <div id="hero-carousel" style="position:relative; width:100%; max-width:1000px; aspect-ratio:4/3; border-radius:12px; overflow:hidden;">
+            <img src="media/GRADUACIÓN 58.png" class="hero-slide active" alt="INFOPRO" onclick="abrirLightbox(this.src)" style="cursor:zoom-in;">
+<img src="media/GRADUACIÓN 56.png" class="hero-slide" alt="INFOPRO" onclick="abrirLightbox(this.src)" style="cursor:zoom-in;">
+<img src="media/GRADUACIÓN 60.png" class="hero-slide" alt="INFOPRO" onclick="abrirLightbox(this.src)" style="cursor:zoom-in;">
+            <button onclick="moverSlide(-1)" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;border-radius:50%;width:38px;height:38px;font-size:1.2rem;cursor:pointer;z-index:10;">‹</button>
+            <button onclick="moverSlide(1)"  style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;border-radius:50%;width:38px;height:38px;font-size:1.2rem;cursor:pointer;z-index:10;">›</button>
+            <div id="hero-dots" style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:10;"></div>
+          </div>
+          <div class="hero-img-badge">
+            <span>1Ra. PROMO</span>
+            PROMOCIÓN 2025<br />
+          </div>
+        </div>
+        <!-- LIGHTBOX -->
+<div id="lightbox" onclick="cerrarLightbox()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:99999;align-items:center;justify-content:center;">
+  <button onclick="cerrarLightbox()" style="position:absolute;top:20px;right:28px;background:none;border:none;color:#fff;font-size:2.5rem;cursor:pointer;line-height:1;">✕</button>
+  <img id="lightbox-img" src="" style="max-width:90vw;max-height:90vh;border-radius:8px;object-fit:contain;" onclick="event.stopPropagation()">
+</div>
+<script>
+  function abrirLightbox(src){
+    const lb = document.getElementById('lightbox');
+    document.getElementById('lightbox-img').src = src;
+    lb.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function cerrarLightbox(){
+    document.getElementById('lightbox').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if(e.key==='Escape') cerrarLightbox(); });
+</script>
+        <style>
+          .hero-slide { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 0.7s ease; pointer-events:none; }
+.hero-slide.active { opacity:1; pointer-events:auto; }
+        </style>
+        <script>
+          (function(){
+            const slides = document.querySelectorAll('.hero-slide');
+            const dotsContainer = document.getElementById('hero-dots');
+            let current = 0;
+            slides.forEach((_,i) => {
+              const d = document.createElement('div');
+              d.style.cssText = `width:8px;height:8px;border-radius:50%;background:${i===0?'#fff':'rgba(255,255,255,0.5)'};cursor:pointer;transition:background 0.3s`;
+              d.onclick = () => goTo(i);
+              dotsContainer.appendChild(d);
+            });
+            function goTo(n){
+              slides[current].classList.remove('active');
+              dotsContainer.children[current].style.background = 'rgba(255,255,255,0.5)';
+              current = (n + slides.length) % slides.length;
+              slides[current].classList.add('active');
+              dotsContainer.children[current].style.background = '#fff';
+            }
+            window.moverSlide = (dir) => goTo(current + dir);
+            setInterval(() => goTo(current + 1), 4000);
+          })();
+        </script>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================
+       BARRA DE CONFIANZA
+  ======================================================== -->
+  <div id="trust-bar">
+    <div class="container">
+      <div class="trust-bar-inner">
+        <div class="trust-item">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          Resolución Ministerial
+        </div>
+        <div class="trust-item">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+          Formación Técnica Profesional
+        </div>
+        <div class="trust-item">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+          Fundado en 2023
+        </div>
+        <div class="trust-item">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          ALTAS SALIDAS LABORALES
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================
+       SECCIÓN: ACERCA DE NOSOTROS
+  ======================================================== -->
+  <section id="acerca">
+    <div class="container">
+      <div class="acerca-inner">
+
+        <!-- IMAGEN — EDITAR: reemplaza placeholder con imagen real -->
+        <div class="acerca-image-stack fade-up">
+          <!-- <img src="RUTA/IMAGEN_ACERCA.jpg" alt="Instituto INFOPRO" class="acerca-img-main" /> -->
+          <div class="img-placeholder acerca-img-placeholder">
+            <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-4 4 4"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+            <span>Imagen del instituto / aulas</span>
+          </div>
+          <div class="acerca-img-badge">
+            <div class="acerca-img-badge-num">2023</div>
+            <div class="acerca-img-badge-txt">desde</div>
+          </div>
+        </div>
+
+        <!-- TEXTO -->
+        <div class="fade-up" style="transition-delay: 0.15s">
+          <span class="section-tag">Acerca de nosotros</span>
+          <!-- EDITAR: Título -->
+          <h2 class="section-title">Formación técnica que transforma vidas</h2>
+          <div class="divider-red"></div>
+          <!-- EDITAR: Texto institucional -->
+          <p style="color: var(--color-gris-medio); line-height: 1.8; margin-bottom: 16px;">
+            El <strong>Instituto Tecnológico de Formación Profesional INFOPRO</strong> fue fundado en 2023 con el propósito de brindar educación técnica de calidad, accesible y orientada a las demandas reales del mercado laboral boliviano.
+          </p>
+          <p style="color: var(--color-gris-medio); line-height: 1.8; margin-bottom: 24px;">
+            Contamos con <strong>Resolución Ministerial aprobada (R.M. 1106/2022)</strong> por el Ministerio de Educación, lo que garantiza la validez y reconocimiento oficial de todos nuestros títulos técnicos. Nuestro enfoque se basa en el aprendizaje práctico: los estudiantes adquieren habilidades reales desde el primer día, preparándolos para insertarse rápidamente al mundo laboral o para emprender su propio negocio.
+          </p>
+
+          <!-- CARACTERÍSTICAS CLAVE — EDITAR texto de cada item -->
+          <div class="acerca-features">
+            <div class="acerca-feature">
+              <div class="acerca-feature-icon">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              </div>
+              <div class="acerca-feature-text">
+                <strong>Resolución Ministerial</strong>
+                <span>R.M. 1106/2022</span>
+              </div>
+            </div>
+            <div class="acerca-feature">
+              <div class="acerca-feature-icon">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+              </div>
+              <div class="acerca-feature-text">
+                <strong>Formación práctica</strong>
+                <span>Clases prácticas </span>
+                <span>desde el primer día </span>
+              </div>
+            </div>
+            <div class="acerca-feature">
+              <div class="acerca-feature-icon">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <div class="acerca-feature-text">
+                <strong>Alta salida laboral</strong>
+                <span>te preparamos para</span>
+                <span>el Empleo o  tu emprendimiento</span>
+              </div>
+            </div>
+            <div class="acerca-feature">
+              <div class="acerca-feature-icon">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              </div>
+              <div class="acerca-feature-text">
+                <strong>Docentes especializados</strong>
+                <span>Docentes altamente capacitados</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================
+       NOVEDADES — TIKTOK
+  ======================================================== -->
+  <section id="novedades">
+    <div class="container">
+
+      <!-- ENCABEZADO -->
+      <div class="novedades-header fade-up">
+        <div class="novedades-tag">
+          <svg class="tiktok-icon-inline" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          Nuestro TikTok
+        </div>
+        <h2 class="novedades-title">Síguenos en<br><span>@tecnologico.infop</span></h2>
+        <p class="novedades-subtitle">Mira nuestros últimos videos, tips educativos y la vida en el instituto directo desde TikTok.</p>
+      </div>
+
+      <!-- GRID DE 3 VIDEOS -->
+      <div class="tiktok-grid">
+
+        <!-- ===== VIDEO 1 =====
+             INSTRUCCIONES PARA REEMPLAZAR:
+             1. Ve a TikTok y abre uno de tus videos
+             2. Haz clic en "Compartir" → "Incrustar"
+             3. Copia el código del iframe/blockquote
+             4. Pega ese código reemplazando el bloque .tiktok-placeholder de abajo
+        ===== -->
+        <div class="tiktok-card fade-up">
+          <div class="tiktok-embed-wrap">
+            <!-- ↓↓↓ REEMPLAZA ESTE BLOQUE CON EL EMBED DE TU VIDEO 1 ↓↓↓ -->
+            <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@tecnologico.infop/video/7613881527235185940" data-video-id="7613881527235185940" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@tecnologico.infop" href="https://www.tiktok.com/@tecnologico.infop?refer=embed">@tecnologico.infop</a> Nuevos año, Nuevos estudiantes y así les dimos su Bienvenida.  Tú tambien puedes  formar parte de INFOPRO. <a title="infopro" target="_blank" href="https://www.tiktok.com/tag/infopro?refer=embed">#INFOPRO</a> <a title="cochabamba" target="_blank" href="https://www.tiktok.com/tag/cochabamba?refer=embed">#COCHABAMBA</a> <a title="instituodeparvularioencochabamba" target="_blank" href="https://www.tiktok.com/tag/instituodeparvularioencochabamba?refer=embed">#instituodeparvularioencochabamba</a> <a title="técnicosuperior" target="_blank" href="https://www.tiktok.com/tag/t%C3%A9cnicosuperior?refer=embed">#técnicosuperior</a> <a title="parvulario" target="_blank" href="https://www.tiktok.com/tag/parvulario?refer=embed">#parvulario</a> <a target="_blank" title="♬ sonido original  - Tecnologico Infopro" href="https://www.tiktok.com/music/sonido-original-Tecnologico-Infopro-7613881646244629269?refer=embed">♬ sonido original  - Tecnologico Infopro</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>
+            <!-- ↑↑↑ FIN BLOQUE VIDEO 1 ↑↑↑ -->
+          </div>
+          <div class="tiktok-card-footer">
+            <span class="tiktok-card-num">Video #01</span>
+            <span class="tiktok-card-badge">
+              <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+              TikTok
+            </span>
+          </div>
+        </div>
+
+        <!-- ===== VIDEO 2 ===== -->
+        <div class="tiktok-card fade-up" style="transition-delay:0.12s;">
+          <div class="tiktok-embed-wrap">
+            <!-- ↓↓↓ REEMPLAZA ESTE BLOQUE CON EL EMBED DE TU VIDEO 2 ↓↓↓ -->
+            <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@tecnologico.infop/video/7460150372766616838" data-video-id="7460150372766616838" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@tecnologico.infop" href="https://www.tiktok.com/@tecnologico.infop?refer=embed">@tecnologico.infop</a> En <a title="infopro" target="_blank" href="https://www.tiktok.com/tag/infopro?refer=embed">#Infopro</a> aprendes todo acerca del <a title="parvulario" target="_blank" href="https://www.tiktok.com/tag/parvulario?refer=embed">#Parvulario</a> Si eres de <a title="cochabamba" target="_blank" href="https://www.tiktok.com/tag/cochabamba?refer=embed">#Cochabamba</a> ya estamos aceptando inscripción para este primer semestre! <a title="bolivia" target="_blank" href="https://www.tiktok.com/tag/bolivia?refer=embed">#Bolivia</a> <a title="guarderia" target="_blank" href="https://www.tiktok.com/tag/guarderia?refer=embed">#Guarderia</a> <a title="colegio" target="_blank" href="https://www.tiktok.com/tag/colegio?refer=embed">#Colegio</a> <a title="educacion" target="_blank" href="https://www.tiktok.com/tag/educacion?refer=embed">#Educacion</a> <a title="niñera" target="_blank" href="https://www.tiktok.com/tag/ni%C3%B1era?refer=embed">#Niñera</a> <a title="desarrollotemprano" target="_blank" href="https://www.tiktok.com/tag/desarrollotemprano?refer=embed">#DesarrolloTemprano</a> <a target="_blank" title="♬ sonido original - Tecnologico Infopro" href="https://www.tiktok.com/music/sonido-original-7460150397552151302?refer=embed">♬ sonido original - Tecnologico Infopro</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>
+            <!-- ↑↑↑ FIN BLOQUE VIDEO 2 ↑↑↑ -->
+          </div>
+          <div class="tiktok-card-footer">
+            <span class="tiktok-card-num">Video #02</span>
+            <span class="tiktok-card-badge">
+              <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+              TikTok
+            </span>
+          </div>
+        </div>
+
+        <!-- ===== VIDEO 3 ===== -->
+        <div class="tiktok-card fade-up" style="transition-delay:0.24s;">
+          <div class="tiktok-embed-wrap">
+            <!-- ↓↓↓ REEMPLAZA ESTE BLOQUE CON EL EMBED DE TU VIDEO 3 ↓↓↓ -->
+            <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@tecnologico.infop/video/7613147387552468244" data-video-id="7613147387552468244" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@tecnologico.infop" href="https://www.tiktok.com/@tecnologico.infop?refer=embed">@tecnologico.infop</a> <p>Así fue nuestro recorrido carnavalero en #INFOPRO Tú tambien puedes formar parte de esta gran familia. #COCHABAMBA #técnicosuperior #tecnico #PARVULARIO</p> <a target="_blank" title="♬ sonido original  - Tecnologico Infopro" href="https://www.tiktok.com/music/sonido-original-Tecnologico-Infopro-7613147498047130375?refer=embed">♬ sonido original  - Tecnologico Infopro</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>
+            <!-- ↑↑↑ FIN BLOQUE VIDEO 3 ↑↑↑ -->
+          </div>
+          <div class="tiktok-card-footer">
+            <span class="tiktok-card-num">Video #03</span>
+            <span class="tiktok-card-badge">
+              <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+              TikTok
+            </span>
+          </div>
+        </div>
+
+      </div><!-- /tiktok-grid -->
+
+      <!-- CTA SEGUIR + STATS -->
+      <div class="novedades-cta fade-up">
+        <a href="https://www.tiktok.com/@tecnologico.infop" target="_blank" rel="noopener" class="btn-tiktok">
+          <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          Seguir en TikTok
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Script oficial de TikTok Embed — necesario para que los videos funcionen -->
+  <script async src="https://www.tiktok.com/embed.js"></script>
+
+  <!-- =======================================================
+       SECCIÓN: CARRERAS
+  ======================================================== -->
+  <section id="carreras">
+    <div class="container">
+      <div class="carreras-header fade-up">
+        <span class="section-tag">Oferta académica</span>
+        <h2 class="section-title">Nuestras carreras técnicas</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">Elige la carrera que impulse tu futuro. Todas nuestras carreras están orientadas al mercado laboral real.</p>
+        <div class="divider-red"></div>
+      </div>
+
+      <div class="carreras-grid">
+
+        <!-- ===== CARRERA 1: MECÁNICO AUTOMOTRIZ ===== -->
+        <!-- EDITAR: Cambia la imagen, nombre, descripción y duración -->
+        <div class="carrera-card fade-up">
+          <!-- <img src="RUTA/IMAGEN_MECANICA.jpg" alt="Mecánico Automotriz" class="carrera-img" /> -->
+          <div class="img-placeholder carrera-img-placeholder">
+            <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+            <span>Imagen carrera: Mecánica Automotriz</span>
+          </div>
+          <div class="carrera-body">
+            <span class="carrera-badge">🔧 Técnica</span>
+            <h3 class="carrera-nombre">Mecánica Automotriz</h3>
+            <p class="carrera-desc">Aprende reparación y mantenimiento de vehículos, trabajando en talleres, concesionarios o creando tu propio negocio.</p>
+            <div class="carrera-footer">
+              <div class="carrera-duracion">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                6 semestres
+              </div>
+              <a href="#contacto" class="carrera-cta">Más info <span>→</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== CARRERA 2: PARVULARIO ===== -->
+        <div class="carrera-card fade-up" style="transition-delay: 0.1s">
+          <!-- <img src="RUTA/IMAGEN_PARVULARIO.jpg" alt="Parvulario" class="carrera-img" /> -->
+          <div class="img-placeholder carrera-img-placeholder">
+            <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>Imagen carrera: Parvulario</span>
+          </div>
+          <div class="carrera-body">
+            <span class="carrera-badge">🎨 Educación</span>
+            <h3 class="carrera-nombre">Parvulario</h3>
+            <p class="carrera-desc">Forma parte del desarrollo de nuevas generaciones trabajando en jardines infantiles, centros educativos o creando tu propio centro de estimulación temprana.</p>
+            <div class="carrera-footer">
+              <div class="carrera-duracion">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                6 semestres
+              </div>
+              <a href="#contacto" class="carrera-cta">Más info <span>→</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== CARRERA 3: CONTABILIDAD ===== -->
+        <div class="carrera-card fade-up" style="transition-delay: 0.2s">
+          <!-- <img src="RUTA/IMAGEN_CONTABILIDAD.jpg" alt="Contabilidad" class="carrera-img" /> -->
+          <div class="img-placeholder carrera-img-placeholder">
+            <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3M9 7l7-4 4 4-7 4M9 7v4l4 4"/></svg>
+            <span>Imagen carrera: Contabilidad</span>
+          </div>
+          <div class="carrera-body">
+            <span class="carrera-badge">📊 Finanzas</span>
+            <h3 class="carrera-nombre">Contabilidad</h3>
+            <p class="carrera-desc">Domina el manejo de finanzas, registros contables y gestión empresarial para trabajar en empresas o administrar tu propio negocio.</p>
+            <div class="carrera-footer">
+              <div class="carrera-duracion">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                3 años
+              </div>
+              <a href="#contacto" class="carrera-cta">Más info <span>→</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== CARRERA 4: SECRETARIADO EJECUTIVO ===== -->
+        <div class="carrera-card fade-up" style="transition-delay: 0.3s">
+          <!-- <img src="RUTA/IMAGEN_SECRETARIADO.jpg" alt="Secretariado Ejecutivo" class="carrera-img" /> -->
+          <div class="img-placeholder carrera-img-placeholder">
+            <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <span>Imagen carrera: Secretariado Ejecutivo</span>
+          </div>
+          <div class="carrera-body">
+            <span class="carrera-badge">💼 Gestión</span>
+            <h3 class="carrera-nombre">Secretariado Ejecutivo</h3>
+            <p class="carrera-desc">Desarrolla habilidades administrativas y de gestión para trabajar en empresas e instituciones públicas o privadas.</p>
+            <div class="carrera-footer">
+              <div class="carrera-duracion">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                3 años
+              </div>
+              <a href="#contacto" class="carrera-cta">Más info <span>→</span></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================
+       SECCIÓN: PLANES DE ESTUDIO
+       EDITAR: Agrega el temario real de cada carrera en cada .plan-content
+  ======================================================== -->
+  <section id="planes">
+    <div class="container">
+      <div class="planes-intro">
+        <div class="fade-up">
+          <span class="section-tag">Contenido académico</span>
+          <h2 class="section-title">Planes de estudio</h2>
+          <div class="divider-red"></div>
+          <p class="section-subtitle">
+            Selecciona una carrera para ver su plan de estudio. Aquí podrás agregar el temario completo, materias por semestre e imágenes de cada área.
+          </p>
+        </div>
+        <!-- ESPACIO PARA IMAGEN ADICIONAL -->
+        <!-- EDITAR: Reemplaza con imagen de estudiantes / aulas -->
+        <div class="img-placeholder fade-up" style="height: 200px; transition-delay: 0.15s; border-radius: var(--radio-tarjeta);">
+          <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-4 4 4"/></svg>
+          <span>Imagen de aulas / prácticas</span>
+        </div>
+      </div>
+
+      <!-- TABS DE SELECCIÓN DE CARRERA -->
+      <div class="planes-tabs" id="planesTabs">
+        <button class="planes-tab active" data-target="plan-mecanica">Mecánico Automotriz</button>
+        <button class="planes-tab" data-target="plan-parvulario">Parvulario</button>
+        <button class="planes-tab" data-target="plan-contabilidad">Contabilidad</button>
+        <button class="planes-tab" data-target="plan-secretariado">Secretariado Ejecutivo</button>
+      </div>
+
+      <!-- ===== PLAN: MECÁNICO AUTOMOTRIZ ===== -->
+      <!-- EDITAR: Agrega las materias reales dentro de este bloque -->
+      <div class="plan-content active" id="plan-mecanica">
+
+
+  <!-- ENCABEZADO DE CARRERA -->
+  <div style="background: var(--color-negro); border-radius: 12px; padding: 32px 40px; margin-bottom: 32px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+    <div>
+      <p style="font-family: var(--fuente-titulo); font-size:1.1rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color: var(--color-primario); margin-bottom:8px;">Técnico Superior</p>
+      <h3 style="font-family: var(--fuente-titulo); font-size:2rem; font-weight:800; color:#fff; margin-bottom:4px;">Mecánica Automotriz</h3>
+      <p style="color:rgba(255,255,255,0.5); font-size:0.9rem;">Duración: 6 semestres · 3 años</p>
+    </div>
+    <div style="display:flex; gap:16px;">
+      <div style="background:#fff; border-radius:12px; padding:24px 32px; text-align:center; min-width:130px;">
+        <div style="font-family:var(--fuente-titulo); font-size:3.5rem; font-weight:800; color:var(--color-primario); line-height:1;">6</div>
+        <div style="font-family:var(--fuente-titulo); font-size:1rem; font-weight:700; color:var(--color-negro); text-transform:uppercase; letter-spacing:0.08em; margin-top:6px;">Semestres</div>
+      </div>
+      <div style="background:#fff; border-radius:12px; padding:24px 32px; text-align:center; min-width:130px;">
+        <div style="font-family:var(--fuente-titulo); font-size:3.5rem; font-weight:800; color:var(--color-primario); line-height:1;">3</div>
+        <div style="font-family:var(--fuente-titulo); font-size:1rem; font-weight:700; color:var(--color-negro); text-transform:uppercase; letter-spacing:0.08em; margin-top:6px;">Años</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= PRIMER AÑO ======= -->
+  <div style="margin-bottom: 12px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+      <div style="width:4px; height:32px; background:var(--color-primario); border-radius:2px;"></div>
+      <h4 style="font-family:var(--fuente-titulo); font-size:1.4rem; font-weight:800; color:var(--color-negro);">Primer Año</h4>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+
+      <!-- SEMESTRE 1 -->
+      <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-primario); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <div style="background:var(--color-primario); color:#fff; font-family:var(--fuente-titulo); font-size:0.75rem; font-weight:700; letter-spacing:0.1em; padding:4px 12px; border-radius:100px; text-transform:uppercase;">1er Semestre</div>
+        </div>
+        <ul style="display:flex; flex-direction:column; gap:10px; list-style:none;">
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Motores a Gasolina 1</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Electricidad Automotriz 1</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Higiene, Seguridad y Medio Ambiente</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Matemática Automotriz</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Metrología Automotriz</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Dibujo Técnico Automotriz 1</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Química Automotriz</li>
+        </ul>
+      </div>
+
+      <!-- SEMESTRE 2 -->
+      <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-negro); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <div style="background:var(--color-negro); color:#fff; font-family:var(--fuente-titulo); font-size:0.75rem; font-weight:700; letter-spacing:0.1em; padding:4px 12px; border-radius:100px; text-transform:uppercase;">2do Semestre</div>
+        </div>
+        <ul style="display:flex; flex-direction:column; gap:10px; list-style:none;">
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Motores a Gasolina 2</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Electricidad Automotriz 2</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Chapería y Soldadura</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Física</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Dibujo Técnico Automotriz 2</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Inglés Técnico</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======= SEGUNDO AÑO ======= -->
+  <div style="margin-bottom: 12px; margin-top:40px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+      <div style="width:4px; height:32px; background:var(--color-primario); border-radius:2px;"></div>
+      <h4 style="font-family:var(--fuente-titulo); font-size:1.4rem; font-weight:800; color:var(--color-negro);">Segundo Año</h4>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+
+      <!-- SEMESTRE 3 -->
+      <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-primario); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <div style="background:var(--color-primario); color:#fff; font-family:var(--fuente-titulo); font-size:0.75rem; font-weight:700; letter-spacing:0.1em; padding:4px 12px; border-radius:100px; text-transform:uppercase;">3er Semestre</div>
+        </div>
+        <ul style="display:flex; flex-direction:column; gap:10px; list-style:none;">
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Motores a Gasolina 3</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Electricidad Automotriz 3</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Motores Diesel 1</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Electrónica Automotriz 1</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Termodinámica</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Transmisiones 1</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Emprendimiento Productivo 1</li>
+        </ul>
+      </div>
+
+      <!-- SEMESTRE 4 -->
+      <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-negro); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <div style="background:var(--color-negro); color:#fff; font-family:var(--fuente-titulo); font-size:0.75rem; font-weight:700; letter-spacing:0.1em; padding:4px 12px; border-radius:100px; text-transform:uppercase;">4to Semestre</div>
+        </div>
+        <ul style="display:flex; flex-direction:column; gap:10px; list-style:none;">
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Motores a Gasolina 4</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Inyección a Gasolina 1</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Motores Diesel 2</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Electrónica Automotriz 2</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Neumática</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Transmisiones 2</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Emprendimiento Productivo 2</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======= TERCER AÑO ======= -->
+  <div style="margin-top:40px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+      <div style="width:4px; height:32px; background:var(--color-primario); border-radius:2px;"></div>
+      <h4 style="font-family:var(--fuente-titulo); font-size:1.4rem; font-weight:800; color:var(--color-negro);">Tercer Año</h4>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+
+      <!-- SEMESTRE 5 -->
+      <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-primario); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <div style="background:var(--color-primario); color:#fff; font-family:var(--fuente-titulo); font-size:0.75rem; font-weight:700; letter-spacing:0.1em; padding:4px 12px; border-radius:100px; text-transform:uppercase;">5to Semestre</div>
+        </div>
+        <ul style="display:flex; flex-direction:column; gap:10px; list-style:none;">
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Inyección Electrónica Diesel 1</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Inyección a Gasolina 2</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Laboratorio Diesel 1</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Electrónica Automotriz 3</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Hidráulica</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Transmisiones 3</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Taller de Modalidad de Graduación 1</li>
+        </ul>
+      </div>
+
+      <!-- SEMESTRE 6 -->
+      <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-negro); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <div style="background:var(--color-negro); color:#fff; font-family:var(--fuente-titulo); font-size:0.75rem; font-weight:700; letter-spacing:0.1em; padding:4px 12px; border-radius:100px; text-transform:uppercase;">6to Semestre</div>
+        </div>
+        <ul style="display:flex; flex-direction:column; gap:10px; list-style:none;">
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Inyección Electrónica Diesel 2</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Inyección a Gasolina 3</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Laboratorio Diesel 2</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Energías Alternativas</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Maquinaria Agrícola y Pesada</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Transmisiones 4</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Taller de Modalidad de Graduación 2</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+      <!-- ===== PLAN: PARVULARIO ===== -->
+      <div class="plan-content" id="plan-parvulario">
+
+  <!-- ENCABEZADO DE CARRERA -->
+  <div style="background: var(--color-negro); border-radius: 12px; padding: 32px 40px; margin-bottom: 32px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+    <div>
+      <p style="font-family: var(--fuente-titulo); font-size:1.1rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color: var(--color-primario); margin-bottom:8px;">Técnico Superior</p>
+      <h3 style="font-family: var(--fuente-titulo); font-size:2rem; font-weight:800; color:#fff; margin-bottom:4px;">Parvulario</h3>
+      <p style="color:rgba(255,255,255,0.5); font-size:0.9rem;">Duración: 6 semestres · 3 años</p>
+    </div>
+    <div style="display:flex; gap:16px;">
+      <div style="background:#fff; border-radius:12px; padding:24px 32px; text-align:center; min-width:130px;">
+        <div style="font-family:var(--fuente-titulo); font-size:3.5rem; font-weight:800; color:var(--color-primario); line-height:1;">6</div>
+        <div style="font-family:var(--fuente-titulo); font-size:1rem; font-weight:700; color:var(--color-negro); text-transform:uppercase; letter-spacing:0.08em; margin-top:6px;">Semestres</div>
+      </div>
+      <div style="background:#fff; border-radius:12px; padding:24px 32px; text-align:center; min-width:130px;">
+        <div style="font-family:var(--fuente-titulo); font-size:3.5rem; font-weight:800; color:var(--color-primario); line-height:1;">3</div>
+        <div style="font-family:var(--fuente-titulo); font-size:1rem; font-weight:700; color:var(--color-negro); text-transform:uppercase; letter-spacing:0.08em; margin-top:6px;">Años</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= PRIMER AÑO ======= -->
+  <div style="margin-bottom: 12px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+      <div style="width:4px; height:32px; background:var(--color-primario); border-radius:2px;"></div>
+      <h4 style="font-family:var(--fuente-titulo); font-size:1.4rem; font-weight:800; color:var(--color-negro);">Primer Año</h4>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+
+      <!-- SEMESTRE 1 -->
+      <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-primario); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <div style="background:var(--color-primario); color:#fff; font-family:var(--fuente-titulo); font-size:0.75rem; font-weight:700; letter-spacing:0.1em; padding:4px 12px; border-radius:100px; text-transform:uppercase;">1er Semestre</div>
+        </div>
+        <ul style="display:flex; flex-direction:column; gap:10px; list-style:none;">
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Psicología General</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Pedagogía General</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Salud e Higiene Ocupacional</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Desarrollo Integral</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Iniciación Musical</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Taller de Creatividad Corporal</li>
+        </ul>
+      </div>
+
+      <!-- SEMESTRE 2 -->
+      <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-negro); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <div style="background:var(--color-negro); color:#fff; font-family:var(--fuente-titulo); font-size:0.75rem; font-weight:700; letter-spacing:0.1em; padding:4px 12px; border-radius:100px; text-transform:uppercase;">2do Semestre</div>
+        </div>
+        <ul style="display:flex; flex-direction:column; gap:10px; list-style:none;">
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Psicología Evolutiva 1</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Didáctica General</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Introducción al Método Montessori</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Educación en Familia Comunitaria</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Práctica Instrumental 1</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Taller de Expresión Corporal Escénica</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======= SEGUNDO AÑO ======= -->
+  <div style="margin-bottom: 12px; margin-top:40px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+      <div style="width:4px; height:32px; background:var(--color-primario); border-radius:2px;"></div>
+      <h4 style="font-family:var(--fuente-titulo); font-size:1.4rem; font-weight:800; color:var(--color-negro);">Segundo Año</h4>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+
+      <!-- SEMESTRE 3 -->
+      <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-primario); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <div style="background:var(--color-primario); color:#fff; font-family:var(--fuente-titulo); font-size:0.75rem; font-weight:700; letter-spacing:0.1em; padding:4px 12px; border-radius:100px; text-transform:uppercase;">3er Semestre</div>
+        </div>
+        <ul style="display:flex; flex-direction:column; gap:10px; list-style:none;">
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Psicología Evolutiva 2</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Neurodesarrollo Infantil</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Taller de Planificación y Evaluación Educativa</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Vida Práctica</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Comportamiento Organizacional</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Práctica Instrumental 2</li>
+        </ul>
+      </div>
+
+      <!-- SEMESTRE 4 -->
+      <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-negro); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <div style="background:var(--color-negro); color:#fff; font-family:var(--fuente-titulo); font-size:0.75rem; font-weight:700; letter-spacing:0.1em; padding:4px 12px; border-radius:100px; text-transform:uppercase;">4to Semestre</div>
+        </div>
+        <ul style="display:flex; flex-direction:column; gap:10px; list-style:none;">
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Taller de Creatividad 1</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Taller de Evaluación del Desarrollo Infantil</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Psicomotricidad 1</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Iniciación a las Matemáticas</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Informática Educativa</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Práctica Instrumental 3</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Taller de Creatividad 2</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======= TERCER AÑO ======= -->
+  <div style="margin-top:40px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+      <div style="width:4px; height:32px; background:var(--color-primario); border-radius:2px;"></div>
+      <h4 style="font-family:var(--fuente-titulo); font-size:1.4rem; font-weight:800; color:var(--color-negro);">Tercer Año</h4>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+
+      <!-- SEMESTRE 5 -->
+      <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-primario); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <div style="background:var(--color-primario); color:#fff; font-family:var(--fuente-titulo); font-size:0.75rem; font-weight:700; letter-spacing:0.1em; padding:4px 12px; border-radius:100px; text-transform:uppercase;">5to Semestre</div>
+        </div>
+        <ul style="display:flex; flex-direction:column; gap:10px; list-style:none;">
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Estimulación Temprana</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Psicomotricidad 2</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Taller de Modalidad de Graduación 1</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Iniciación a la Lectoescritura</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Emprendimiento Productivo</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Práctica Instrumental 4</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Taller de Elaboración de Material Didáctico</li>
+        </ul>
+      </div>
+
+      <!-- SEMESTRE 6 -->
+      <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-negro); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <div style="background:var(--color-negro); color:#fff; font-family:var(--fuente-titulo); font-size:0.75rem; font-weight:700; letter-spacing:0.1em; padding:4px 12px; border-radius:100px; text-transform:uppercase;">6to Semestre</div>
+        </div>
+        <ul style="display:flex; flex-direction:column; gap:10px; list-style:none;">
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Necesidades Educativas Especiales</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Taller de Estrategias del Proceso Enseñanza-Aprendizaje</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Taller de Modalidad de Graduación 2</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Legislación Laboral y Seguridad Social Aplicada</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Taller Integrado de Música</li>
+          <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Taller de Maquillaje Artístico y Creatividad 1</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+      <!-- ===== PLAN: CONTABILIDAD ===== -->
+      <div class="plan-content" id="plan-contabilidad">
+
+  <!-- ENCABEZADO DE CARRERA -->
+  <div style="background: var(--color-negro); border-radius: 12px; padding: 32px 40px; margin-bottom: 32px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+    <div>
+      <p style="font-family: var(--fuente-titulo); font-size:1.1rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color: var(--color-primario); margin-bottom:8px;">Técnico Superior</p>
+      <h3 style="font-family: var(--fuente-titulo); font-size:2rem; font-weight:800; color:#fff; margin-bottom:4px;">Contabilidad</h3>
+      <p style="color:rgba(255,255,255,0.5); font-size:0.9rem;">Duración: 3 años</p>
+    </div>
+    <div style="display:flex; gap:16px;">
+      <div style="background:#fff; border-radius:12px; padding:24px 32px; text-align:center; min-width:130px;">
+        <div style="font-family:var(--fuente-titulo); font-size:3.5rem; font-weight:800; color:var(--color-primario); line-height:1;">3</div>
+        <div style="font-family:var(--fuente-titulo); font-size:1rem; font-weight:700; color:var(--color-negro); text-transform:uppercase; letter-spacing:0.08em; margin-top:6px;">Años</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= PRIMER AÑO ======= -->
+  <div style="margin-bottom:12px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+      <div style="width:4px; height:32px; background:var(--color-primario); border-radius:2px;"></div>
+      <h4 style="font-family:var(--fuente-titulo); font-size:1.4rem; font-weight:800; color:var(--color-negro);">Primer Año</h4>
+    </div>
+    <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-primario); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+      <ul style="display:grid; grid-template-columns:1fr 1fr; gap:10px; list-style:none;">
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Contabilidad 1</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Matemática Financiera</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Informática Contable</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Administración General</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Estadística Aplicada</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Legislación Laboral y Seguridad Social Aplicada</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Economía General Aplicada</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Documentos Comerciales y Mercantiles</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ======= SEGUNDO AÑO ======= -->
+  <div style="margin-bottom:12px; margin-top:40px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+      <div style="width:4px; height:32px; background:var(--color-primario); border-radius:2px;"></div>
+      <h4 style="font-family:var(--fuente-titulo); font-size:1.4rem; font-weight:800; color:var(--color-negro);">Segundo Año</h4>
+    </div>
+    <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-negro); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+      <ul style="display:grid; grid-template-columns:1fr 1fr; gap:10px; list-style:none;">
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Contabilidad 2</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Contabilidad de Costos 1</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Contabilidad de Sociedades</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Contabilidad de Seguros</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Contabilidad Bancaria y Cooperativas</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Investigación Aplicada y Emprendimiento</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Sistema Tributario</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ======= TERCER AÑO ======= -->
+  <div style="margin-top:40px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+      <div style="width:4px; height:32px; background:var(--color-primario); border-radius:2px;"></div>
+      <h4 style="font-family:var(--fuente-titulo); font-size:1.4rem; font-weight:800; color:var(--color-negro);">Tercer Año</h4>
+    </div>
+    <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-primario); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+      <ul style="display:grid; grid-template-columns:1fr 1fr; gap:10px; list-style:none;">
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Contabilidad Agropecuaria</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Contabilidad de Costos 2</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Contabilidad Gubernamental</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Contabilidad Extractiva (Minería, Petrolera, Forestal)</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Contabilidad de Servicios (Construcción, Hostelería y Transportes)</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Gabinete Contable Económico</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Análisis e Interpretación de Estados Financieros</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Taller de Modalidad de Graduación</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+      <!-- ===== PLAN: SECRETARIADO EJECUTIVO ===== -->
+      <div class="plan-content" id="plan-secretariado">
+
+  <!-- ENCABEZADO DE CARRERA -->
+  <div style="background: var(--color-negro); border-radius: 12px; padding: 32px 40px; margin-bottom: 32px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+    <div>
+      <p style="font-family: var(--fuente-titulo); font-size:1.1rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color: var(--color-primario); margin-bottom:8px;">Técnico Superior</p>
+      <h3 style="font-family: var(--fuente-titulo); font-size:2rem; font-weight:800; color:#fff; margin-bottom:4px;">Secretariado Ejecutivo</h3>
+      <p style="color:rgba(255,255,255,0.5); font-size:0.9rem;">Duración: 3 años</p>
+    </div>
+    <div style="display:flex; gap:16px;">
+      <div style="background:#fff; border-radius:12px; padding:24px 32px; text-align:center; min-width:130px;">
+        <div style="font-family:var(--fuente-titulo); font-size:3.5rem; font-weight:800; color:var(--color-primario); line-height:1;">3</div>
+        <div style="font-family:var(--fuente-titulo); font-size:1rem; font-weight:700; color:var(--color-negro); text-transform:uppercase; letter-spacing:0.08em; margin-top:6px;">Años</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= PRIMER AÑO ======= -->
+  <div style="margin-bottom:12px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+      <div style="width:4px; height:32px; background:var(--color-primario); border-radius:2px;"></div>
+      <h4 style="font-family:var(--fuente-titulo); font-size:1.4rem; font-weight:800; color:var(--color-negro);">Primer Año</h4>
+    </div>
+    <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-primario); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+      <ul style="display:grid; grid-template-columns:1fr 1fr; gap:10px; list-style:none;">
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Gestión Secretarial 1</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Gramática Normativa</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Redacción y Correspondencia 1</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Ofimática 1</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Documentos Mercantiles y Derecho Laboral</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Archivística Física y Digital</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Idioma Originario 1</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Mecanografía Computarizada</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ======= SEGUNDO AÑO ======= -->
+  <div style="margin-bottom:12px; margin-top:40px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+      <div style="width:4px; height:32px; background:var(--color-primario); border-radius:2px;"></div>
+      <h4 style="font-family:var(--fuente-titulo); font-size:1.4rem; font-weight:800; color:var(--color-negro);">Segundo Año</h4>
+    </div>
+    <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-negro); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+      <ul style="display:grid; grid-template-columns:1fr 1fr; gap:10px; list-style:none;">
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Gestión Secretarial 2</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Inglés Técnico 1</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Redacción y Correspondencia 2</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Ofimática 2</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Contabilidad 1</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Relaciones Humanas</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Idioma Originario 2</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ======= TERCER AÑO ======= -->
+  <div style="margin-top:40px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+      <div style="width:4px; height:32px; background:var(--color-primario); border-radius:2px;"></div>
+      <h4 style="font-family:var(--fuente-titulo); font-size:1.4rem; font-weight:800; color:var(--color-negro);">Tercer Año</h4>
+    </div>
+    <div style="background:#fff; border:1px solid #eee; border-top: 4px solid var(--color-primario); border-radius:10px; padding:24px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+      <ul style="display:grid; grid-template-columns:1fr 1fr; gap:10px; list-style:none;">
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Administración Organizacional</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Inglés Técnico 2</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Redacción y Correspondencia 3</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Taller de Modalidad de Graduación</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Contabilidad 2</li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:#444; padding:8px 10px; background:#fafafa; border-radius:6px; border-left:3px solid #eee;"><span style="color:var(--color-primario); font-weight:700; margin-top:1px;">→</span> Relaciones Públicas y Organización de Eventos</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+    </div>
+  </section>
+<!-- =======================================================
+       SECCIÓN: REQUISITOS
+  ======================================================== -->
+  <section id="requisitos" style="padding:80px 0; background:var(--color-gris-claro);">
+    <div class="container">
+      <div class="fade-up" style="text-align:center; margin-bottom:40px;">
+        <span class="section-tag">Admisión</span>
+        <h2 class="section-title">Requisitos de inscripción</h2>
+        <div class="divider-red" style="margin:18px auto 0;"></div>
+      </div>
+      <div class="fade-up" style="max-width:780px; margin:0 auto 40px; display:flex; flex-direction:column; gap:20px;">
+          <div style="background:#fff; border-radius:12px; padding:28px 36px; box-shadow:var(--sombra-suave); display:flex; align-items:center; gap:20px; border-left:6px solid var(--color-primario);">
+            <span style="background:var(--color-primario); color:#fff; border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.1rem; flex-shrink:0;">1</span>
+            <span style="font-size:1.25rem; font-weight:800; color:var(--color-negro); font-family:var(--fuente-titulo); letter-spacing:0.02em;">Fotocopia del certificado de nacimiento</span>
+          </div>
+          <div style="background:#fff; border-radius:12px; padding:28px 36px; box-shadow:var(--sombra-suave); display:flex; align-items:center; gap:20px; border-left:6px solid var(--color-primario);">
+            <span style="background:var(--color-primario); color:#fff; border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.1rem; flex-shrink:0;">2</span>
+            <span style="font-size:1.25rem; font-weight:800; color:var(--color-negro); font-family:var(--fuente-titulo); letter-spacing:0.02em;">Fotocopia del carnet de identidad vigente</span>
+          </div>
+          <div style="background:#fff; border-radius:12px; padding:28px 36px; box-shadow:var(--sombra-suave); display:flex; align-items:center; gap:20px; border-left:6px solid var(--color-primario);">
+            <span style="background:var(--color-primario); color:#fff; border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.1rem; flex-shrink:0;">3</span>
+            <span style="font-size:1.25rem; font-weight:800; color:var(--color-negro); font-family:var(--fuente-titulo); letter-spacing:0.02em;">Fotocopia del Título de bachiller</span>
+          </div>
+      </div>
+
+      <!-- BOTÓN INSCRIBETE -->
+      <div class="fade-up" style="text-align:center; margin-top: 12px;">
+        <a href="inscripcion.html"
+           style="display:inline-flex; align-items:center; gap:10px;
+                  background:var(--color-primario); color:#fff;
+                  font-family:var(--fuente-titulo); font-size:1.3rem;
+                  font-weight:800; letter-spacing:0.06em;
+                  padding:18px 48px; border-radius:8px;
+                  border:2px solid var(--color-primario);
+                  transition:var(--transicion); text-decoration:none;">
+          ¡INSCRÍBETE AQUÍ!
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+  <!-- =======================================================
+       SECCIÓN: FORMACIÓN PRÁCTICA
+  ======================================================== -->
+  <section id="practica">
+    <div class="container">
+      <div class="practica-inner">
+
+        <!-- IMAGEN — EDITAR: reemplaza con imagen de estudiantes en práctica -->
+        <div class="fade-up">
+          <!-- <img src="RUTA/IMAGEN_PRACTICA.jpg" alt="Formación práctica" style="width:100%; height:440px; object-fit:cover; border-radius: var(--radio-tarjeta);"> -->
+          <div class="img-placeholder practica-img-placeholder">
+            <svg width="40" height="40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-4 4 4"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+            <span style="color: rgba(255,255,255,0.3)">Imagen de estudiantes en práctica</span>
+          </div>
+        </div>
+
+        <!-- CONTENIDO -->
+        <div class="practica-content fade-up" style="transition-delay: 0.15s">
+          <span class="section-tag">Lo que nos diferencia</span>
+          <h2 class="section-title">Aprendizaje 100% práctico</h2>
+          <div class="divider-red"></div>
+          <!-- EDITAR: Descripción del enfoque práctico -->
+          <p style="color: rgba(255,255,255,0.55); margin-bottom: 8px; line-height: 1.8;">
+            En INFOPRO creemos que la mejor manera de aprender es haciendo. Por eso, desde el primer semestre nuestros estudiantes realizan ejercicios, simulaciones y prácticas reales en cada área.
+          </p>
+
+          <!-- ITEMS — EDITAR cada item con las características reales -->
+          <div class="practica-items">
+            <div class="practica-item">
+              <div class="practica-item-num">01</div>
+              <div>
+                <div class="practica-item-title">Talleres y laboratorios equipados</div>
+                <div class="practica-item-desc">Instalaciones adecuadas para el aprendizaje de cada carrera.</div>
+              </div>
+            </div>
+            <div class="practica-item">
+              <div class="practica-item-num">02</div>
+              <div>
+                <div class="practica-item-title">Docentes con experiencia real</div>
+                <div class="practica-item-desc">Profesionales activos que comparten conocimiento vigente del sector.</div>
+              </div>
+            </div>
+            <div class="practica-item">
+              <div class="practica-item-num">03</div>
+              <div>
+                <div class="practica-item-title">Prácticas desde el primer semestre</div>
+                <div class="practica-item-desc">Los estudiantes aplican lo aprendido desde el inicio de la carrera.</div>
+              </div>
+            </div>
+            <div class="practica-item">
+              <div class="practica-item-num">04</div>
+              <div>
+                <div class="practica-item-title">Preparación para el trabajo real con prácticas pre-profesionales</div>
+                <div class="practica-item-desc">Antes de concluir la carrera todos los estudiantes realiazan sus prácticas Pre-profesionales como parte de su preparación para el mundo laboral.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- =======================================================
+       SECCIÓN: MISIÓN Y VISIÓN
+  ======================================================== -->
+  <section id="mision-vision">
+    <div class="container">
+      <div style="text-align:center; margin-bottom: 56px;">
+        <span class="section-tag" style="color: rgba(255,255,255,0.5)">Identidad institucional</span>
+        <h2 class="section-title" style="color: var(--color-blanco);">Misión &amp; Visión</h2>
+        <div class="divider-red" style="margin: 18px auto 0;"></div>
+      </div>
+      <div class="mv-grid fade-up">
+
+        <!-- MISIÓN — EDITAR: Reemplaza el texto con la misión oficial -->
+        <div class="mv-card">
+          <div class="mv-icon">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          </div>
+          <div class="mv-card-label"></div>
+          <h3 class="mv-card-title">Nuestra visión</h3>
+          <!-- EDITAR: Texto de misión -->
+          <p class="mv-card-text">
+            Convertirnos en el referente tecnológico líder en educación práctica, siendo reconocidos por la calidad de nuestros egresados y su capacidad de adaptación inmediata al mundo laboral. Aspiramos a ser una institución innovadora que transforma el potencial de las personas en éxito profesional, impulsando el desarrollo socioeconómico a través de una formación técnica rigurosa, eficiente y profundamente conectada con las necesidades de la industria global.
+          </p>
+        </div>
+
+        <!-- VISIÓN — EDITAR: Reemplaza el texto con la visión oficial -->
+        <div class="mv-card">
+          <div class="mv-icon">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+          </div>
+          <div class="mv-card-label"></div>
+          <h3 class="mv-card-title">Nuestra misión</h3>
+          <!-- EDITAR: Texto de visión -->
+          <p class="mv-card-text">
+            Formar profesionales altamente capacitados mediante un modelo educativo técnico-práctico de vanguardia, donde el aprendizaje basado en la experiencia predomina sobre la teoría. En INFOPRO, nos dedicamos a equipar a nuestros estudiantes con las competencias reales y las herramientas tecnológicas que demanda el sector productivo, apoyados por un cuerpo docente de excelencia comprometido con la excelencia técnica y el éxito profesional de cada uno de nuestros alumnos.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================
+       SECCIÓN: CONTACTO
+  ======================================================== -->
+  <section id="contacto">
+    <div class="container">
+      <div class="contacto-inner">
+
+        <!-- COLUMNA IZQUIERDA -->
+        <div class="fade-up">
+          <span class="section-tag">Habla con nosotros</span>
+          <h2 class="section-title">¿Listo para comenzar tu futuro?</h2>
+          <div class="divider-red"></div>
+          <!-- EDITAR: Texto de contacto -->
+          <p class="section-subtitle" style="margin-bottom: 40px;">
+            Escríbenos por WhatsApp y te asesoramos sin compromiso. También puedes seguirnos en nuestras redes sociales para conocer más sobre el instituto.
+          </p>
+
+          <!-- BOTÓN WHATSAPP — EDITAR: cambia el número si es necesario -->
+          <!-- Número actual: 77918982 -->
+          <div class="contacto-whatsapp-wrap">
+            <a
+              href="https://wa.me/59177918982?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20las%20carreras%20de%20INFOPRO"
+              target="_blank"
+              rel="noopener"
+              class="btn btn-whatsapp"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Escríbenos por WhatsApp
+            </a>
+            <p class="contacto-whatsapp-hint"> +591 77918982 · Respondemos de lunes a viernes</p>
+          </div>
+
+          <!-- REDES SOCIALES — EDITAR: Agrega el href real de cada red cuando estén disponibles -->
+          <div class="redes-label">Síguenos en redes sociales</div>
+          <div class="redes-grid">
+            <!-- EDITAR: href="URL_FACEBOOK" -->
+            <a href="https://www.facebook.com/profile.php?id=100089571272830" class="red-social-btn facebook" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              Facebook
+            </a>
+            <!-- EDITAR: href="URL_INSTAGRAM" -->
+            <a href="https://www.instagram.com/infopro.bo" class="red-social-btn instagram" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              Instagram
+            </a>
+            <!-- EDITAR: href="URL_TIKTOK" -->
+            <a href="https://www.tiktok.com/@tecnologico.infop" class="red-social-btn tiktok" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+              TikTok
+            </a>
+          </div>
+        </div>
+
+        <!-- COLUMNA DERECHA: INFO DE CONTACTO -->
+        <div class="fade-up" style="transition-delay: 0.15s">
+          <div class="contacto-info-card">
+
+            <!-- TELÉFONO — EDITAR -->
+            <div class="contacto-info-item">
+              <div class="contacto-info-icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+              </div>
+              <div>
+                <div class="contacto-info-label">WhatsApp / Teléfono</div>
+                <!-- EDITAR: número de teléfono -->
+                <div class="contacto-info-value">+591 77918982</div>
+              </div>
+            </div>
+
+            <!-- DIRECCIÓN — EDITAR -->
+            <div class="contacto-info-item">
+              <div class="contacto-info-icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <div>
+                <div class="contacto-info-label">Dirección</div>
+                <!-- EDITAR: Dirección real del instituto -->
+                <div class="contacto-info-value">Calle Santivañez #141 Entre Ayacucho y Nataniel Aguirre, Lado Galería Guadalupe.</div>
+              </div>
+            </div>
+
+            <!-- EMAIL — EDITAR (opcional) -->
+            <div class="contacto-info-item">
+              <div class="contacto-info-icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <div>
+                <div class="contacto-info-label">Correo electrónico</div>
+                <!-- EDITAR: email del instituto -->
+                <div class="contacto-info-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0c3cfd2d2c5cfe0c9cec6cfd0d2cf8ec5c4d58ec2cf"><span class="__cf_email__" data-cfemail="197a75787d7c7b7675706f7078597e74787075377a7674">[email&#160;protected]</span></a></div>
+              </div>
+            </div>
+
+            <!-- HORARIO — EDITAR -->
+            <div class="contacto-info-item">
+              <div class="contacto-info-icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <div>
+                <div class="contacto-info-label">Horario de atención</div>
+                <!-- EDITAR: Horario real -->
+                <div class="contacto-info-value">Lunes a Viernes 9:00 a 12:00       |       15:00 a 19:00</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- MAPA — EDITAR: Reemplaza con el iframe de Google Maps real -->
+          <!-- Ejemplo: <iframe src="https://maps.google.com/maps?q=...&output=embed" width="100%" height="220" style="border:0; border-radius: 12px;" allowfullscreen loading="lazy"></iframe> -->
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d800.3965609754727!2d-66.157840069213!3d-17.39502444557569!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e3730bb1547395%3A0xbb20c70f22ef4b0f!2sTECNOLOGICO%20INFOPRO!5e0!3m2!1ses!2sbo!4v1773442860440!5m2!1ses!2sbo" width="100%" height="280" style="border:0; border-radius:12px;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+
+        <!-- MARCA -->
+        <div>
+          <!-- LOGO — EDITAR: Descomenta <img> cuando tengas el logo en versión blanca -->
+          <!-- <img src="RUTA/LOGO_BLANCO.png" alt="INFOPRO" class="footer-brand-logo" /> -->
+          <div style="background:#ffffff; border-radius:8px; padding:8px 14px; display:inline-block; margin-bottom:12px;">
+  <img src="media/LOGOHD.PNG.png" alt="INFOPRO" style="height:90px; width:auto; display:block;" />
+</div>
+          <!-- EDITAR: Descripción breve del instituto -->
+          <p class="footer-desc">
+            Instituto Tecnológico de Formación Profesional INFOPRO. Formando profesionales técnicos con resolución ministerial aprobada desde 2023.
+          </p>
+          <!-- REDES SOCIALES — EDITAR: Agrega los href reales -->
+          <div class="footer-redes">
+            <a href="https://www.facebook.com/profile.php?id=100089571272830" class="footer-red" title="Facebook" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/infopro.bo" class="footer-red" title="Instagram" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@tecnologico.infop" class="footer-red" title="TikTok" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+            <a href="https://wa.me/59177918982" class="footer-red" title="WhatsApp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- LINKS RÁPIDOS -->
+        <div>
+          <div class="footer-col-title">Navegación</div>
+          <ul class="footer-links">
+            <li><a href="#hero">→ Inicio</a></li>
+            <li><a href="#acerca">→ Acerca de nosotros</a></li>
+            <li><a href="#carreras">→ Nuestras carreras</a></li>
+            <li><a href="#mision-vision">→ Misión &amp; Visión</a></li>
+            <li><a href="#planes">→ Planes de estudio</a></li>
+            <li><a href="#novedades">→ Novedades TikTok</a></li>
+            <li><a href="#contacto">→ Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- CARRERAS -->
+        <div>
+          <div class="footer-col-title">Carreras</div>
+          <ul class="footer-links">
+            <li><a href="#carreras">→ Mecánico Automotriz</a></li>
+            <li><a href="#carreras">→ Parvulario</a></li>
+            <li><a href="#carreras">→ Contabilidad</a></li>
+            <li><a href="#carreras">→ Secretariado Ejecutivo</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- BARRA INFERIOR -->
+      <div class="footer-bottom">
+        <!-- EDITAR: año y nombre -->
+        <p class="footer-copy">© 2023–2025 Instituto Tecnológico de Formación Profesional INFOPRO. Todos los derechos reservados.</p>
+        <div class="footer-rm">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          Resolución Ministerial 1106/2022
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- =======================================================
+       WIDGET WHATSAPP FLOTANTE
+  ======================================================== -->
+  <div id="whatsapp-widget">
+    <div id="wa-bubble" onclick="goToWhatsApp()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      <span>¡Contáctanos Por WhatsApp!</span>
+      <div id="wa-close" onclick="closeBubble(event)">✕</div>
+    </div>
+    <div id="wa-btn" onclick="goToWhatsApp()" title="Contáctanos por WhatsApp">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+    </div>
+  </div>
+
+  <style>
+    #whatsapp-widget {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+    #wa-bubble {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      background: #25D366;
+      color: #fff;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 11px 18px 11px 13px;
+      border-radius: 22px 22px 6px 22px;
+      box-shadow: 0 8px 28px rgba(37,211,102,0.40), 0 2px 8px rgba(0,0,0,0.10);
+      white-space: nowrap;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      opacity: 0;
+      transform: translateX(20px) scale(0.92);
+      animation: waBubbleIn 0.55s cubic-bezier(0.34,1.56,0.64,1) 0.9s forwards;
+    }
+    #wa-bubble:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 12px 36px rgba(37,211,102,0.50);
+    }
+    #wa-close {
+      display: none;
+      position: absolute;
+      top: -7px;
+      right: -7px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.35);
+      color: #fff;
+      font-size: 10px;
+      line-height: 20px;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid #fff;
+      transition: background 0.2s;
+    }
+    #wa-close:hover { background: #c0392b; }
+    #wa-bubble:hover #wa-close { display: block; }
+    #wa-btn {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: #25D366;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.50), 0 2px 8px rgba(0,0,0,0.12);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+      animation: waBtnPop 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.3s both;
+      position: relative;
+    }
+    #wa-btn:hover {
+      transform: scale(1.12);
+      box-shadow: 0 10px 34px rgba(37,211,102,0.65);
+    }
+    #wa-btn::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: rgba(37,211,102,0.30);
+      animation: waPing 2.4s ease-out 2s infinite;
+    }
+    @keyframes waBtnPop {
+      from { opacity:0; transform:scale(0.5); }
+      to   { opacity:1; transform:scale(1); }
+    }
+    @keyframes waBubbleIn {
+      from { opacity:0; transform:translateX(20px) scale(0.92); }
+      to   { opacity:1; transform:translateX(0) scale(1); }
+    }
+    @keyframes waBubbleOut {
+      to { opacity:0; transform:translateX(20px) scale(0.88); }
+    }
+    @keyframes waPing {
+      0%   { transform:scale(1);    opacity:0.7; }
+      80%  { transform:scale(1.55); opacity:0; }
+      100% { transform:scale(1.55); opacity:0; }
+    }
+  </style>
+
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // =====================================================
+    // MENÚ HAMBURGUESA (MÓVIL)
+    // =====================================================
+    const navToggle = document.getElementById('navToggle');
+    const navLinks  = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    // Cierra el menú al hacer click en un link
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+
+    // =====================================================
+    // TABS DE PLANES DE ESTUDIO
+    // =====================================================
+    document.getElementById('planesTabs').addEventListener('click', (e) => {
+      if (!e.target.classList.contains('planes-tab')) return;
+
+      // Desactivar todos
+      document.querySelectorAll('.planes-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.plan-content').forEach(c => c.classList.remove('active'));
+
+      // Activar el seleccionado
+      e.target.classList.add('active');
+      document.getElementById(e.target.dataset.target).classList.add('active');
+    });
+
+
+    // =====================================================
+    // ANIMACIONES DE ENTRADA (Intersection Observer)
+    // Detecta cuando los elementos con .fade-up entran
+    // en el viewport y les agrega la clase .visible
+    // =====================================================
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // =====================================================
+    // WIDGET WHATSAPP FLOTANTE
+    // =====================================================
+    const WHATSAPP_NUMBER  = "59177918982";
+    const WHATSAPP_MESSAGE = "¡Hola! Me gustaría obtener más información sobre las carreras de INFOPRO.";
+
+    function goToWhatsApp() {
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
+    }
+    function closeBubble(e) {
+      e.stopPropagation();
+      const bubble = document.getElementById('wa-bubble');
+      bubble.style.animation = 'waBubbleOut 0.3s ease forwards';
+      setTimeout(() => bubble.style.display = 'none', 310);
+    }
+    setTimeout(() => {
+      const bubble = document.getElementById('wa-bubble');
+      if (bubble && bubble.style.display !== 'none') {
+        bubble.style.animation = 'waBubbleOut 0.4s ease forwards';
+        setTimeout(() => bubble.style.display = 'none', 410);
+      }
+    }, 7000);
+
+
+    // =====================================================
+    // HEADER SCROLL EFFECT
+    // Añade sombra al header cuando el usuario hace scroll
+    // =====================================================
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window

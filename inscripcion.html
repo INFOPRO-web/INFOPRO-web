@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario de Inscripción — INFOPRO</title>
+  <link rel="icon" type="image/png" href="media/LOGO.PNG.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --color-primario:      #df0d20;
+      --color-primario-dark: #990000;
+      --color-negro:         #111111;
+      --color-gris-oscuro:   #2C2C2C;
+      --color-gris-medio:    #888888;
+      --color-gris-claro:    #F4F4F4;
+      --color-blanco:        #FFFFFF;
+      --fuente-titulo: 'Barlow Condensed', sans-serif;
+      --fuente-cuerpo: 'Barlow', sans-serif;
+      --sombra-suave: 0 4px 24px rgba(0,0,0,0.08);
+      --sombra-media: 0 8px 40px rgba(0,0,0,0.14);
+      --radio-tarjeta: 12px;
+      --transicion: all 0.3s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--fuente-cuerpo);
+      color: var(--color-gris-oscuro);
+      background: var(--color-gris-claro);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ── NAVBAR ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-negro);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo-img { height: 42px; width: auto; }
+    .btn-volver {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--fuente-titulo);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.7);
+      transition: var(--transicion);
+      padding: 8px 0;
+    }
+    .btn-volver:hover { color: #fff; }
+    .btn-volver svg { transition: var(--transicion); }
+    .btn-volver:hover svg { transform: translateX(-4px); }
+
+    /* ── HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--color-negro) 0%, #2a0008 65%, var(--color-primario-dark) 100%);
+      padding: 52px 24px 44px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg, transparent, transparent 40px,
+        rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 80px
+      );
+    }
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--fuente-titulo);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-primario);
+      background: rgba(223,13,32,0.12);
+      border: 1px solid rgba(223,13,32,0.35);
+      padding: 5px 16px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .page-hero h1 {
+      font-family: var(--fuente-titulo);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .page-hero h1 span { color: var(--color-primario); }
+    .page-hero p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.6);
+      max-width: 460px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* ── LAYOUT PRINCIPAL ── */
+    .main-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+      display: grid;
+      grid-template-columns: 310px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+  .main-wrap {
+    grid-template-columns: 1fr;
+    padding: 24px 16px 48px;
+  }
+  .panel-req {
+    position: static !important;
+  }
+}
+    /* ── PANEL IZQUIERDO: REQUISITOS ── */
+    .panel-req {
+      border-radius: var(--radio-tarjeta);
+      overflow: hidden;
+      box-shadow: var(--sombra-suave);
+      position: sticky;
+      top: 84px;
+    }
+    .panel-req-header {
+      background: var(--color-negro);
+      color: #fff;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .panel-req-header h3 {
+      font-family: var(--fuente-titulo);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0;
+      letter-spacing: 0.04em;
+    }
+    .req-list {
+      background: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .req-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--color-gris-claro);
+      border-radius: 8px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--color-primario);
+    }
+    .req-num {
+      background: var(--color-primario);
+      color: #fff;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--fuente-titulo);
+      font-weight: 800;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .req-item span {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--color-negro);
+      line-height: 1.3;
+    }
+
+    /* ── BLOQUE WHATSAPP ── */
+    .whatsapp-block {
+      background: #fff;
+      border-top: 1px solid #e8e8e8;
+      padding: 20px;
+    }
+    .whatsapp-block p {
+      font-size: 0.88rem;
+      color: var(--color-gris-oscuro);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .whatsapp-block p strong {
+      color: var(--color-negro);
+      display: block;
+      font-family: var(--fuente-titulo);
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .btn-wa {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #25D366;
+      color: #fff;
+      font-family: var(--fuente-titulo);
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      padding: 14px 20px;
+      border-radius: 8px;
+      border: 2px solid #25D366;
+      transition: var(--transicion);
+      width: 100%;
+      text-align: center;
+    }
+    .btn-wa:hover {
+      background: #1daf55;
+      border-color: #1daf55;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37,211,102,0.35);
+    }
+    .btn-wa svg { flex-shrink: 0; }
+
+    /* ── PANEL DERECHO: FORMULARIO ── */
+    .panel-form {
+      background: #fff;
+      border-radius: var(--radio-tarjeta);
+      box-shadow: var(--sombra-suave);
+      overflow: hidden;
+    }
+    .panel-form-header {
+      background: linear-gradient(135deg, var(--color-primario), var(--color-primario-dark));
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .form-header-icon {
+      background: rgba(255,255,255,0.18);
+      border-radius: 10px;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .panel-form-header h2 {
+      font-family: var(--fuente-titulo);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 2px;
+      letter-spacing: 0.03em;
+    }
+    .panel-form-header p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.8);
+      margin: 0;
+    }
+    .panel-form-body {
+      padding: 28px;
+      min-height: 520px;
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: var(--color-negro);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 22px 24px;
+      font-size: 0.84rem;
+    }
+    .page-footer a { color: var(--color-primario); }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <header>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="media/LOGO.PNG.png" alt="INFOPRO" class="nav-logo-img" />
+      </a>
+      <a href="index.html" class="btn-volver">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <path d="M19 12H5M5 12l7-7M5 12l7 7"/>
+        </svg>
+        Volver al inicio
+      </a>
+    </div>
+  </header>
+
+  <!-- ── HERO ── -->
+  <div class="page-hero">
+    <div class="hero-badge">Admisión 2025</div>
+    <h1>Formulario de <span>Inscripción</span></h1>
+    <p>Completa el formulario y reserva tu cupo en el Instituto Tecnológico INFOPRO.</p>
+  </div>
+
+  <!-- ── CONTENIDO ── -->
+  <div class="main-wrap">
+
+    <!-- COLUMNA IZQUIERDA -->
+    <aside class="panel-req">
+
+      <!-- Encabezado requisitos -->
+      <div class="panel-req-header">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+        </svg>
+        <h3>Requisitos</h3>
+      </div>
+
+      <!-- Lista de requisitos -->
+      <div class="req-list">
+        <div class="req-item">
+          <div class="req-num">1</div>
+          <span>Fotocopia del certificado de nacimiento</span>
+        </div>
+        <div class="req-item">
+          <div class="req-num">2</div>
+          <span>Fotocopia del carnet de identidad vigente</span>
+        </div>
+        <div class="req-item">
+          <div class="req-num">3</div>
+          <span>Fotocopia del título de bachiller</span>
+        </div>
+      </div>
+
+      <!-- Bloque WhatsApp -->
+      <div class="whatsapp-block">
+        <p>
+          <strong>📎 Envía tus documentos digitalmente</strong>
+          Una vez completado el formulario, envía tus documentos en formato digital mediante WhatsApp.
+        </p>
+        <a
+          href="https://wa.me/59177918982?text=Hola%2C%20quiero%20enviar%20mis%20documentos%20para%20la%20inscripci%C3%B3n%20en%20INFOPRO."
+          target="_blank"
+          class="btn-wa">
+          <!-- Ícono WhatsApp -->
+          <svg width="22" height="22" viewBox="0 0 32 32" fill="#fff">
+            <path d="M16 3C8.82 3 3 8.82 3 16c0 2.3.6 4.5 1.74 6.44L3 29l6.74-1.72A13 13 0 0 0 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3zm6.4 18.4c-.27.76-1.58 1.46-2.17 1.54-.55.08-1.24.11-2-.13a18.5 18.5 0 0 1-1.9-.7C13.5 20.9 11.2 18 11 17.7c-.2-.3-1.6-2.13-1.6-4.07s1.02-2.9 1.38-3.3c.37-.4.8-.5 1.07-.5h.76c.24 0 .57-.1.9.68l1.15 2.8c.1.24.05.52-.08.76l-.46.67c-.14.2-.29.42-.12.8.17.37.76 1.26 1.63 2.04 1.12 1 2.06 1.3 2.43 1.45.37.14.59.12.8-.07l.57-.67c.22-.27.44-.18.74-.07l2.59 1.22c.3.14.5.21.57.33.07.12.07.67-.2 1.42z"/>
+          </svg>
+          ENVIAR DOCUMENTOS POR WHATSAPP
+        </a>
+      </div>
+
+    </aside>
+
+    <!-- COLUMNA DERECHA: FORMULARIO -->
+    <div class="panel-form">
+      <div class="panel-form-header">
+        <div class="form-header-icon">📋</div>
+        <div>
+          <h2>Formulario de Inscripción</h2>
+          <p>Instituto Tecnológico INFOPRO — Cochabamba, Bolivia</p>
+        </div>
+      </div>
+      <div class="panel-form-body">
+        <!-- ── EMBED JOTFORM ── -->
+        <script type="text/javascript" src="https://form.jotform.com/jsform/260757318279064"></script>
+        <!-- ── FIN EMBED JOTFORM ── -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="page-footer">
+    <p>¿Tienes dudas? <a href="index.html#contacto">Contáctanos aquí</a> &nbsp;·&nbsp; © 2025 Instituto Tecnológico INFOPRO — Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>
